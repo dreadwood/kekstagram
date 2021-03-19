@@ -60,5 +60,5 @@ export {
   checkStrLength,
   createArrayDontRepeatNum,
   makeRandomArr,
-  createArrSequenceNum
+  createArrSequenceNum,
 };

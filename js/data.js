@@ -56,5 +56,5 @@ const createPhoto = (id) => {
 };
 
 export {
-  createPhoto
+  createPhoto,
 };
