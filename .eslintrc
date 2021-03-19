@@ -10,3 +10,9 @@ env:
 
 extends:
   "htmlacademy/vanilla"
+
+rules:
+  semi: "error"
+  comma-dangle:
+    - "error"
+    - "always-multiline"
