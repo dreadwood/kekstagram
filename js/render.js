@@ -8,6 +8,7 @@ const renderSmallPicture = (imgData) => {
     .textContent = imgData.likes;
   pictureElement.querySelector('.picture__comments')
     .textContent = imgData.comments.length;
+  pictureElement.dataset.id = imgData.id;
 
   return pictureElement;
 };
