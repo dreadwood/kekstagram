@@ -1,6 +1,6 @@
 import {createPhoto} from './data.js';
 import {createArrayDontRepeatNum} from './utils.js';
-import {renderPicture} from './render.js';
+import {renderSmallPicture} from './render.js';
 
 const MAX_NUMBER_PHOTOS = 25;
 
@@ -10,7 +10,7 @@ const photos = createArrayDontRepeatNum(MAX_NUMBER_PHOTOS).map(num => createPhot
 
 const fragment = document.createDocumentFragment();
 photos.forEach((photo) => {
-  const pictureElement = renderPicture(photo);
+  const pictureElement = renderSmallPicture(photo);
   fragment.appendChild(pictureElement);
 });
 picturesElement.appendChild(fragment);

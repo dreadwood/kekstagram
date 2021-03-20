@@ -1,8 +1,8 @@
-const pictureTemplate = document.querySelector('#picture')
+const smallPictureTemplate = document.querySelector('#picture')
   .content.querySelector('.picture');
 
-const renderPicture = (imgData) => {
-  const pictureElement = pictureTemplate.cloneNode(true);
+const renderSmallPicture = (imgData) => {
+  const pictureElement = smallPictureTemplate.cloneNode(true);
   pictureElement.querySelector('.picture__img').src = imgData.url;
   pictureElement.querySelector('.picture__likes')
     .textContent = imgData.likes;
@@ -13,5 +13,5 @@ const renderPicture = (imgData) => {
 };
 
 export {
-  renderPicture,
+  renderSmallPicture,
 };
