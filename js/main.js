@@ -2,7 +2,7 @@ import {createPhoto} from './data.js';
 import {createArrayDontRepeatNum} from './utils.js';
 import {renderPicture} from './render.js';
 
-const MAX_NUMBER_PHOTOS =25;
+const MAX_NUMBER_PHOTOS = 25;
 
 const picturesElement = document.querySelector('.pictures');
 

@@ -12,7 +12,15 @@ extends:
   "htmlacademy/vanilla"
 
 rules:
-  semi: "error"
+  array-bracket-spacing: "error"
   comma-dangle:
-    - "error"
-    - "always-multiline"
+  - "error"
+  - "always-multiline"
+  comma-spacing: "error"
+  computed-property-spacing: "error"
+  keyword-spacing: "error"
+  object-curly-spacing: "error"
+  semi: "error"
+  space-in-parens: "error"
+  space-infix-ops: "error"
+  space-unary-ops: "error"
