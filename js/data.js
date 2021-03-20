@@ -1,12 +1,23 @@
 import {getRandomInteger, createArrayDontRepeatNum} from './utils.js';
 
-const MESSAGE_TEXTS = [
+const COMMENTS = [
   'Всё отлично!',
   'В целом всё неплохо. Но не всё.',
   'Когда вы делаете фотографию, хорошо бы убирать палец из кадра. В конце концов это просто непрофессионально.',
   'Моя бабушка случайно чихнула с фотоаппаратом в руках и у неё получилась фотография лучше.',
   'Я поскользнулся на банановой кожуре и уронил фотоаппарат на кота и у меня получилась фотография лучше.',
   'Лица у людей на фотке перекошены, как будто их избивают. Как можно было поймать такой неудачный момент?!',
+];
+
+const DESCRIPTIONS = [
+  'Потрясающее фото',
+  'Лучшее многовение прошлого года',
+  'Мои приключения',
+  'Пусть день рождение не наступил, но друзья уже удивляют',
+  'Если кажется, что все вокруг катится под откос, плюнь и пусть себе катится',
+  'Никогда не видел ничего подобного',
+  'Ух... Неплохо вчера отдохнул',
+  'Незабывай — лето еще впереди',
 ];
 
 const NAMES = [
@@ -32,7 +43,7 @@ const createComment = (id) => {
   return {
     id,
     avatar: `img/avatar-${id}.svg`,
-    message: MESSAGE_TEXTS[getRandomInteger(MESSAGE_TEXTS.length - 1)],
+    message: COMMENTS[getRandomInteger(COMMENTS.length - 1)],
     name: NAMES[getRandomInteger(NAMES.length - 1)],
   };
 };
@@ -49,7 +60,7 @@ const createPhoto = (id) => {
   return {
     id,
     url: `photos/${id}.jpg`,
-    description: 'Потрясающее фото',
+    description: DESCRIPTIONS[getRandomInteger(DESCRIPTIONS.length - 1)],
     likes: getRandomInteger(15, 200),
     comments,
   };
