@@ -69,6 +69,7 @@ const updateSlider = ({MIN: min, MAX: max, STEP: step}) => {
   if (slider.noUiSlider) {
     slider.noUiSlider.updateOptions(options);
   } else {
+    // eslint-disable-next-line no-undef
     noUiSlider.create(slider, options);
     slider.noUiSlider.on('update', sliderUpdateHandler);
   }
@@ -163,7 +164,7 @@ inputUpload.addEventListener('click', (evt) => {
   showEditor();
 });
 
-editor.addEventListener('click', (evt) => {
+editor.addEventListener('mousedown', (evt) => {
   if (evt.target === editor) {
     hiddenEditor();
   }
