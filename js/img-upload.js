@@ -1,3 +1,5 @@
+import {isEscEvent} from './utils.js';
+
 const uploadElement = document.querySelector('.img-upload');
 // const form = uploadElement.querySelector('.img-upload__form');
 const btnUpload = uploadElement.querySelector('.img-upload__input');
@@ -6,10 +8,10 @@ const btnClose = uploadElement.querySelector('.img-upload__cancel');
 
 
 const showEditor = () => {
+  document.addEventListener('keydown', escKeydownHandler);
+
   editor.classList.remove('hidden');
   document.body.classList.add('modal-open');
-
-  document.addEventListener('keydown', escKeydownHandler);
 };
 
 const hiddenEditor = () => {
@@ -19,7 +21,7 @@ const hiddenEditor = () => {
 
 const escKeydownHandler = (evt) => {
   evt.preventDefault();
-  if (evt.key === 'Escape' || evt.key === 'Esc') {
+  if (isEscEvent(evt)) {
     hiddenEditor();
   }
   document.removeEventListener('keydown', escKeydownHandler);
