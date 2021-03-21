@@ -1,3 +1,5 @@
+import {isEscEvent} from './utils.js';
+
 const bigPicture  = document.querySelector('.big-picture');
 const btnClose  = bigPicture.querySelector('.big-picture__cancel');
 const img  = bigPicture.querySelector('.big-picture__img img');
@@ -40,6 +42,7 @@ const showBigPicture = (imgData) => {
   commentsList.textContent = '';
   commentsList.appendChild(fragment);
 
+  document.addEventListener('keydown', escKeydownHandler);
 
   document.body.classList.add('modal-open');
   bigPicture.classList.remove('hidden');
@@ -48,6 +51,14 @@ const showBigPicture = (imgData) => {
 const hiddenBigPicture = () => {
   bigPicture.classList.add('hidden');
   document.body.classList.remove('modal-open');
+};
+
+const escKeydownHandler = (evt) => {
+  evt.preventDefault();
+  if (isEscEvent(evt)) {
+    hiddenBigPicture();
+  }
+  document.removeEventListener('keydown', escKeydownHandler);
 };
 
 btnClose.addEventListener('click', () => {

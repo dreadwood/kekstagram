@@ -17,7 +17,7 @@ const getRandomInteger = (num1, num2 = 0) => {
 /**
  * @param {string} str
  * @param {number} maxLength
- * @return {Boolean} Проверяет длину строки
+ * @return {boolean} Проверяет длину строки
  */
 const checkStrLength = (str, maxLength) => {
   return (str.length <= maxLength) ? true : false;
@@ -49,10 +49,17 @@ const makeRandomArr = (arr) => [...arr].sort(() => Math.random() - 0.5);
 
 
 /**
-* @param {number} max
-* @return {Array} Создает массив последовательностью чисел
-*/
+  * @param {number} max
+  * @return {Array} Создает массив последовательностью чисел
+  */
 const createArrSequenceNum = (max) => [...(new Array(max).keys())].map(item => item + 1);
+
+/**
+  * @param {KeyboardEvent} evt
+  * @return {boolean} Проверяет нажата клавиша ESC или нет
+  */
+const isEscEvent = (evt) =>
+  evt.key === 'Escape' || evt.key === 'Esc';
 
 
 export {
@@ -61,4 +68,5 @@ export {
   createArrayDontRepeatNum,
   makeRandomArr,
   createArrSequenceNum,
+  isEscEvent,
 };
