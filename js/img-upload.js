@@ -2,7 +2,7 @@ import {isEscEvent} from './utils.js';
 
 const uploadElement = document.querySelector('.img-upload');
 // const form = uploadElement.querySelector('.img-upload__form');
-const btnUpload = uploadElement.querySelector('.img-upload__input');
+const inputUpload = uploadElement.querySelector('.img-upload__input');
 const editor = uploadElement.querySelector('.img-upload__overlay');
 const btnClose = uploadElement.querySelector('.img-upload__cancel');
 
@@ -15,6 +15,7 @@ const showEditor = () => {
 };
 
 const hiddenEditor = () => {
+  inputUpload.value = '';
   editor.classList.add('hidden');
   document.body.classList.remove('modal-open');
 };
@@ -31,12 +32,12 @@ btnClose.addEventListener('click', () => {
   hiddenEditor();
 });
 
-// btnUpload.addEventListener('change', (evt) => {
+// inputUpload.addEventListener('change', (evt) => {
 //   showEditor();
 // });
 
 // временно, пока не загружается нужное изображение
-btnUpload.addEventListener('click', (evt) => {
+inputUpload.addEventListener('click', (evt) => {
   evt.preventDefault();
   showEditor();
 });
