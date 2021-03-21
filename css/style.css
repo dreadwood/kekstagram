@@ -645,28 +645,43 @@ main {
 }
 
 .effects__preview--chrome {
-  -webkit-filter: grayscale(1);
-          filter: grayscale(1);
+  /* -webkit-filter: grayscale(1);
+          filter: grayscale(1); */
+  --filter-value: 1;
+  -webkit-filter: grayscale(var(--filter-value));
+          filter: grayscale(var(--filter-value));
 }
 
 .effects__preview--sepia {
-  -webkit-filter: sepia(1);
-          filter: sepia(1);
+  /* -webkit-filter: sepia(1);
+          filter: sepia(1); */
+  --filter-value: 1;
+  -webkit-filter: sepia(var(--filter-value));
+          filter: sepia(var(--filter-value));
 }
 
 .effects__preview--marvin {
-  -webkit-filter: invert(100%);
-          filter: invert(100%);
+  /* -webkit-filter: invert(100%);
+          filter: invert(100%); */
+  --filter-value: 100;
+  -webkit-filter: invert(calc(var(--filter-value) * 1%));
+          filter: invert(calc(var(--filter-value) * 1%));
 }
 
 .effects__preview--phobos {
-  -webkit-filter: blur(3px);
-          filter: blur(3px);
+  /* -webkit-filter: blur(3px);
+          filter: blur(3px); */
+  --filter-value: 3;
+  -webkit-filter: blur(calc(var(--filter-value) * 1px));
+          filter: blur(calc(var(--filter-value) * 1px));
 }
 
 .effects__preview--heat {
-  -webkit-filter: brightness(3);
-          filter: brightness(3);
+  /* -webkit-filter: brightness(3);
+          filter: brightness(3); */
+  --filter-value: 3;
+  -webkit-filter: brightness(var(--filter-value));
+          filter: brightness(var(--filter-value));
 }
 
 
