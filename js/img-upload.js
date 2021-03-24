@@ -4,6 +4,7 @@ import '../nouislider/nouislider.js';
 const DEFAULT_SCALE = 100;
 const MIN_SCALE = 25;
 const STEP_SCALE = 25;
+const LEFT_MOUSE_CODE = 0;
 
 const FilterOptions = {
   Chrome: {
@@ -49,6 +50,11 @@ const effectsElements = uploadElement.querySelector('.img-upload__effects');
 const inputEffect = uploadElement.querySelector('.effect-level__value');
 const slider = uploadElement.querySelector('.effect-level__slider');
 
+// ограничить слайдер по краям, чтобы range не прилипал
+// удалть лишние css классы
+// написать функцию сброс параметров у uploadElement или просто сброс формы
+// разбить на модули этот файл
+
 const sliderUpdateHandler = (values, handle) => {
   const value = parseFloat(values[handle]);
   inputEffect.value = value;
@@ -84,6 +90,7 @@ effectsElements.addEventListener('change', (evt) => {
       if (slider.noUiSlider) {
         slider.noUiSlider.destroy();
       }
+      inputEffect.value = ''; // вынести?
       break;
     case 'chrome':
       updateSlider(FilterOptions.Chrome);
@@ -165,7 +172,7 @@ inputUpload.addEventListener('click', (evt) => {
 });
 
 editor.addEventListener('mousedown', (evt) => {
-  if (evt.target === editor) {
+  if (evt.target === editor && evt.button === LEFT_MOUSE_CODE) {
     hiddenEditor();
   }
 });
