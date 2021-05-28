@@ -2,7 +2,7 @@ import {createPhoto} from './data.js';
 import {createArrayDontRepeatNum} from './utils.js';
 import {renderSmallPicture} from './render.js';
 import {showBigPicture} from './big-picture.js';
-import './img-upload.js';
+import './editor.js';
 
 const MAX_NUMBER_PHOTOS = 25;
 

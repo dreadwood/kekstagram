@@ -1,7 +1,7 @@
 /**
  * @param {number} num1
  * @param {number} num2
- * @return {number} Случайное целове число
+ * @return {number} Случайное целое число
  */
 const getRandomInteger = (num1, num2 = 0) => {
   if (num1 === num2) {
@@ -53,6 +53,7 @@ const makeRandomArr = (arr) => [...arr].sort(() => Math.random() - 0.5);
   * @return {Array} Создает массив последовательностью чисел
   */
 const createArrSequenceNum = (max) => [...(new Array(max).keys())].map(item => item + 1);
+
 
 /**
   * @param {KeyboardEvent} evt
