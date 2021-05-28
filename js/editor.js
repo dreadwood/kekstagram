@@ -1,7 +1,7 @@
 import {isEscEvent} from './utils.js';
 import {tagsFieldInputHandler} from './editor-validation.js';
-import {effectsElementsChangeHandler} from './editor-slider.js';
-import {scaleElementsClickHandler} from './editor-scale.js';
+import {initSlider} from './editor-slider.js';
+import {initScale} from './editor-scale.js';
 
 const LEFT_MOUSE_CODE = 0;
 
@@ -9,11 +9,9 @@ const uploadElement = document.querySelector('.img-upload');
 // const form = uploadElement.querySelector('.img-upload__form');
 const inputUpload = uploadElement.querySelector('.img-upload__input');
 const editor = uploadElement.querySelector('.img-upload__overlay');
+const photo = uploadElement.querySelector('.img-upload__preview img');
 const btnClose = uploadElement.querySelector('.img-upload__cancel');
 
-const scaleElements = uploadElement.querySelector('.img-upload__scale');
-
-const effectsElements = uploadElement.querySelector('.img-upload__effects');
 const tagsField = uploadElement.querySelector('.text__hashtags');
 const commentsField = uploadElement.querySelector('.text__description');
 
@@ -65,6 +63,7 @@ editor.addEventListener('mousedown', (evt) => {
   }
 });
 
-scaleElements.addEventListener('click', scaleElementsClickHandler);
-effectsElements.addEventListener('change', effectsElementsChangeHandler);
+initScale(uploadElement, photo);
+initSlider(uploadElement, photo);
+
 tagsField.addEventListener('input', tagsFieldInputHandler);

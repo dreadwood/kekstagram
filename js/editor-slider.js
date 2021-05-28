@@ -28,95 +28,67 @@ const FilterOptions = {
   },
 };
 
-const uploadElement = document.querySelector('.img-upload');
-const photo = uploadElement.querySelector('.img-upload__preview img');
-const inputEffect = uploadElement.querySelector('.effect-level__value');
-const slider = uploadElement.querySelector('.effect-level__slider');
+const initSlider = (uploadElement, photo) => {
+  const effectsElements = uploadElement.querySelector('.img-upload__effects');
+  const inputEffect = uploadElement.querySelector('.effect-level__value');
+  const slider = uploadElement.querySelector('.effect-level__slider');
 
-const sliderUpdateHandler = (values, handle) => {
-  const value = parseFloat(values[handle]);
-  inputEffect.value = value;
-  photo.style.setProperty('--filter-value', value);
-};
-
-const updateSlider = ({MIN: min, MAX: max, STEP: step}) => {
-  const options = {
-    start: max,
-    step: step,
-    connect: 'lower',
-    range: {
-      min: min,
-      max: max,
-    },
+  const sliderUpdateHandler = (values, handle) => {
+    const value = parseFloat(values[handle]);
+    inputEffect.value = value;
+    photo.style.setProperty('--filter-value', value);
   };
 
-  if (slider.noUiSlider) {
-    slider.noUiSlider.updateOptions(options);
-  } else {
-    // eslint-disable-next-line no-undef
-    noUiSlider.create(slider, options);
-    slider.noUiSlider.on('update', sliderUpdateHandler);
-  }
-};
+  const updateSlider = ({MIN: min, MAX: max, STEP: step}) => {
+    const options = {
+      start: max,
+      step: step,
+      connect: 'lower',
+      range: {
+        min: min,
+        max: max,
+      },
+    };
 
-// effectsElements.addEventListener('change', (evt) => {
-//   photo.className = '';
-//   photo.classList.add(`effects__preview--${evt.target.value}`);
+    if (slider.noUiSlider) {
+      slider.noUiSlider.updateOptions(options);
+    } else {
+      // eslint-disable-next-line no-undef
+      noUiSlider.create(slider, options);
+      slider.noUiSlider.on('update', sliderUpdateHandler);
+    }
+  };
 
-//   switch (evt.target.value) {
-//     case 'none':
-//       if (slider.noUiSlider) {
-//         slider.noUiSlider.destroy();
-//       }
-//       inputEffect.value = ''; // вынести?
-//       break;
-//     case 'chrome':
-//       updateSlider(FilterOptions.Chrome);
-//       break;
-//     case 'sepia':
-//       updateSlider(FilterOptions.Sepia);
-//       break;
-//     case 'marvin':
-//       updateSlider(FilterOptions.Marvin);
-//       break;
-//     case 'phobos':
-//       updateSlider(FilterOptions.Phobos);
-//       break;
-//     case 'heat':
-//       updateSlider(FilterOptions.Heat);
-//       break;
-//   }
-// });
+  effectsElements.addEventListener('change', (evt) => {
+    photo.className = '';
+    photo.classList.add(`effects__preview--${evt.target.value}`);
 
-const effectsElementsChangeHandler = (evt) => {
-  photo.className = '';
-  photo.classList.add(`effects__preview--${evt.target.value}`);
-
-  switch (evt.target.value) {
-    case 'none':
-      if (slider.noUiSlider) {
-        slider.noUiSlider.destroy();
-      }
-      inputEffect.value = ''; // вынести?
-      break;
-    case 'chrome':
-      updateSlider(FilterOptions.Chrome);
-      break;
-    case 'sepia':
-      updateSlider(FilterOptions.Sepia);
-      break;
-    case 'marvin':
-      updateSlider(FilterOptions.Marvin);
-      break;
-    case 'phobos':
-      updateSlider(FilterOptions.Phobos);
-      break;
-    case 'heat':
-      updateSlider(FilterOptions.Heat);
-      break;
-  }
+    switch (evt.target.value) {
+      case 'none':
+        if (slider.noUiSlider) {
+          slider.noUiSlider.destroy();
+        }
+        inputEffect.value = ''; // вынести?
+        break;
+      case 'chrome':
+        updateSlider(FilterOptions.Chrome);
+        break;
+      case 'sepia':
+        updateSlider(FilterOptions.Sepia);
+        break;
+      case 'marvin':
+        updateSlider(FilterOptions.Marvin);
+        break;
+      case 'phobos':
+        updateSlider(FilterOptions.Phobos);
+        break;
+      case 'heat':
+        updateSlider(FilterOptions.Heat);
+        break;
+    }
+  });
 };
 
 export {
-  effectsElementsChangeHandler,
+  initSlider,
 };
