@@ -96,11 +96,8 @@ const slider = uploadElement.querySelector('.effect-level__slider');
 const tagsInput = uploadElement.querySelector('.text__hashtags');
 const commentsInput = uploadElement.querySelector('.text__description');
 
-// ограничить слайдер по краям, чтобы range не прилипал
-// удалть лишние css классы
 // написать функцию сброс параметров у uploadElement или просто сброс формы
 // разбить на модули этот файл
-// возможно назвать однотипно поля comments и tagsInput
 
 const sliderUpdateHandler = (values, handle) => {
   const value = parseFloat(values[handle]);

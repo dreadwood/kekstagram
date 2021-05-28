@@ -555,6 +555,7 @@ main {
 
 .effect-level .noUi-target {
   border-radius: 16px;
+  margin: 0 16px;
 }
 
 .effect-level .noUi-connects {
