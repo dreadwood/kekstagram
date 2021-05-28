@@ -5,6 +5,11 @@ const DEFAULT_SCALE = 100;
 const MIN_SCALE = 25;
 const STEP_SCALE = 25;
 const LEFT_MOUSE_CODE = 0;
+const TAG_SYMBOL = '#';
+const TAG_SEPARATOR = ' ';
+const TAG_PATTERN = /^[a-z0-9#]*$/i;
+const TAG_LENGTH = 20;
+const MAX_NUM_TAGS = 5;
 
 const FilterOptions = {
   Chrome: {
@@ -34,6 +39,45 @@ const FilterOptions = {
   },
 };
 
+const TagChecks = {
+  hash: {
+    check(tags) {
+      return tags.some((tag) => tag[0] !== TAG_SYMBOL);
+    },
+    message: 'Хэш-тег должен начинается с символа #.',
+  },
+  empty: {
+    check(tags) {
+      return tags.some((tag) => tag.length === 1 && tag === TAG_SYMBOL);
+    },
+    message: 'Хеш-тег не может состоять только из #.',
+  },
+  quantity: {
+    check(tags) {
+      return tags.length > MAX_NUM_TAGS;
+    },
+    message: 'Нельзя указать больше 5 хэш-тегов.',
+  },
+  duplication: {
+    check(tags) {
+      return new Set(tags).size !== tags.length;
+    },
+    message: 'Один и тот же хэш-тег не может быть использован дважды.',
+  },
+  length: {
+    check(tags) {
+      return tags.some((tag) => tag.length > TAG_LENGTH);
+    },
+    message: 'Максимальная длина одного хэш-тега 20 символов, включая #.',
+  },
+  structure: {
+    check(tags) {
+      return tags.some((tag) => !TAG_PATTERN.test(tag));
+    },
+    message: 'Хеш-тег должен состоять только из буквы и чисел.',
+  },
+};
+
 const uploadElement = document.querySelector('.img-upload');
 // const form = uploadElement.querySelector('.img-upload__form');
 const inputUpload = uploadElement.querySelector('.img-upload__input');
@@ -49,11 +93,14 @@ const inputScale = scaleElements.querySelector('.scale__control--value');
 const effectsElements = uploadElement.querySelector('.img-upload__effects');
 const inputEffect = uploadElement.querySelector('.effect-level__value');
 const slider = uploadElement.querySelector('.effect-level__slider');
+const tagsInput = uploadElement.querySelector('.text__hashtags');
+const commentsInput = uploadElement.querySelector('.text__description');
 
 // ограничить слайдер по краям, чтобы range не прилипал
 // удалть лишние css классы
 // написать функцию сброс параметров у uploadElement или просто сброс формы
 // разбить на модули этот файл
+// возможно назвать однотипно поля comments и tagsInput
 
 const sliderUpdateHandler = (values, handle) => {
   const value = parseFloat(values[handle]);
@@ -143,36 +190,73 @@ const showEditor = () => {
   document.body.classList.add('modal-open');
 };
 
-const hiddenEditor = () => {
+const hideEditor = () => {
+  document.removeEventListener('keydown', escKeydownHandler);
+
   inputUpload.value = '';
   editor.classList.add('hidden');
   document.body.classList.remove('modal-open');
 };
 
 const escKeydownHandler = (evt) => {
-  evt.preventDefault();
-  if (isEscEvent(evt)) {
-    hiddenEditor();
+  const focusElement = document.activeElement;
+
+  if (isEscEvent(evt) &&
+      focusElement !== tagsInput &&
+      focusElement !== commentsInput) {
+    evt.preventDefault();
+    hideEditor();
   }
-  document.removeEventListener('keydown', escKeydownHandler);
 };
 
 btnClose.addEventListener('click', () => {
-  hiddenEditor();
+  hideEditor();
 });
 
-// inputUpload.addEventListener('change', (evt) => {
-//   showEditor();
-// });
-
-// временно, пока не загружается нужное изображение
-inputUpload.addEventListener('click', (evt) => {
-  evt.preventDefault();
+inputUpload.addEventListener('change', () => {
   showEditor();
 });
 
+// временно, пока не загружается нужное изображение
+// inputUpload.addEventListener('click', (evt) => {
+//   evt.preventDefault();
+//   showEditor();
+// });
+
 editor.addEventListener('mousedown', (evt) => {
   if (evt.target === editor && evt.button === LEFT_MOUSE_CODE) {
-    hiddenEditor();
+    hideEditor();
   }
+});
+
+tagsInput.addEventListener('input', (evt) => {
+  let errorMessage = '';
+  const tags = evt.target.value.toLowerCase().split(TAG_SEPARATOR)
+    .filter((item) => item !== '');
+
+  if (TagChecks.hash.check(tags)) {
+    errorMessage += `${TagChecks.hash.message}\n`;
+  }
+
+  if (TagChecks.empty.check(tags)) {
+    errorMessage += `${TagChecks.empty.message}\n`;
+  }
+
+  if (TagChecks.quantity.check(tags)) {
+    errorMessage += `${TagChecks.quantity.message}\n`;
+  }
+
+  if (TagChecks.duplication.check(tags)) {
+    errorMessage += `${TagChecks.duplication.message}\n`;
+  }
+
+  if (TagChecks.length.check(tags)) {
+    errorMessage += `${TagChecks.length.message}\n`;
+  }
+
+  if (TagChecks.structure.check(tags)) {
+    errorMessage += `${TagChecks.structure.message}\n`;
+  }
+
+  tagsInput.setCustomValidity(errorMessage);
 });

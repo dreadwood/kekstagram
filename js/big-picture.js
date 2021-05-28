@@ -54,11 +54,11 @@ const hiddenBigPicture = () => {
 };
 
 const escKeydownHandler = (evt) => {
-  evt.preventDefault();
   if (isEscEvent(evt)) {
+    evt.preventDefault();
     hiddenBigPicture();
+    document.removeEventListener('keydown', escKeydownHandler);
   }
-  document.removeEventListener('keydown', escKeydownHandler);
 };
 
 btnClose.addEventListener('click', () => {
