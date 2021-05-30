@@ -1,8 +1,11 @@
+const URL_LOAD = 'https://22.javascript.pages.academy/kekstagram/data';
+const URL_UPLOAD = 'https://22.javascript.pages.academy/kekstagram';
+
 const SEND_ERROR_MESSAGE = 'Не удалось отправить изображение. Попробуйте еще раз.';
 const GET_ERROR_MESSAGE = 'Не удалось загрузить приложение. Попробуйте позже.';
 
 const getData = (onSuccess, onFall) => {
-  fetch('https://22.javascript.pages.academy/kekstagram/data')
+  fetch(URL_LOAD)
     .then((response) => {
       if (response.ok) {
         return response.json();
@@ -10,12 +13,11 @@ const getData = (onSuccess, onFall) => {
       throw new Error();
     })
     .then((data) => onSuccess(data))
-    // .then((data) => data)
     .catch(() => onFall(GET_ERROR_MESSAGE));
 };
 
 const sendData = (onSuccess, onFall, body) => {
-  fetch('https://22.javascript.pages.academy/kekstagram', {
+  fetch(URL_UPLOAD, {
     method: 'POST',
     type: 'multipart/form-data',
     body,
