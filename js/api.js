@@ -10,6 +10,7 @@ const getData = (onSuccess, onFall) => {
       throw new Error();
     })
     .then((data) => onSuccess(data))
+    // .then((data) => data)
     .catch(() => onFall(GET_ERROR_MESSAGE));
 };
 
