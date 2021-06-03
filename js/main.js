@@ -1,5 +1,5 @@
-import {renderPhotoFeed} from './feed.js';
 import {getData} from './api.js';
+import {renderPhotoFeed} from './feed.js';
 import './editor.js';
 
 // TO-DO

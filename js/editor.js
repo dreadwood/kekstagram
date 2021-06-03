@@ -1,8 +1,9 @@
-import {isEscEvent} from './utils.js';
-import {tagsFieldInputHandler} from './editor-validation.js';
-import {initSlider, resetSlider} from './editor-slider.js';
-import {initScale} from './editor-scale.js';
 import {sendData} from './api.js';
+import {initScale} from './editor-scale.js';
+import {initSlider, resetSlider} from './editor-slider.js';
+import {tagsFieldInputHandler} from './editor-validation.js';
+import {showSuccess, showError} from './messages.js';
+import {isEscEvent} from './utils.js';
 
 const LEFT_MOUSE_CODE = 0;
 
@@ -60,11 +61,9 @@ inputUpload.addEventListener('change', () => {
 
 form.addEventListener('submit', (evt) => {
   evt.preventDefault();
-  sendData(
-    hideEditor,
-    null,
-    new FormData(evt.target),
-  );
+
+  sendData(showSuccess, showError, new FormData(evt.target));
+  hideEditor();
 });
 
 editor.addEventListener('mousedown', (evt) => {
