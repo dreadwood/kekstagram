@@ -1,5 +1,6 @@
 import {getData} from './api.js';
 import {renderPhotoFeed} from './feed.js';
+import {showAppError} from './messages.js';
 import './editor.js';
 
 // TO-DO
@@ -8,4 +9,4 @@ import './editor.js';
 
 // const MAX_NUMBER_PHOTOS = 25;
 
-getData(renderPhotoFeed);
+getData(renderPhotoFeed, showAppError);
