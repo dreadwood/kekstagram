@@ -28,6 +28,8 @@ const FilterOptions = {
   },
 };
 
+let resetSlider;
+
 const initSlider = (uploadElement, photo) => {
   const effectsElements = uploadElement.querySelector('.img-upload__effects');
   const inputEffect = uploadElement.querySelector('.effect-level__value');
@@ -59,16 +61,21 @@ const initSlider = (uploadElement, photo) => {
     }
   };
 
+  resetSlider = () => {
+    if (slider.noUiSlider) {
+      slider.noUiSlider.destroy();
+    }
+    photo.className = null;
+    photo.style = null;
+    inputEffect.value = null;
+  };
+
   effectsElements.addEventListener('change', (evt) => {
-    photo.className = '';
-    photo.classList.add(`effects__preview--${evt.target.value}`);
+    photo.className = `effects__preview--${evt.target.value}`;
 
     switch (evt.target.value) {
       case 'none':
-        if (slider.noUiSlider) {
-          slider.noUiSlider.destroy();
-        }
-        inputEffect.value = ''; // вынести?
+        resetSlider();
         break;
       case 'chrome':
         updateSlider(FilterOptions.Chrome);
@@ -91,4 +98,5 @@ const initSlider = (uploadElement, photo) => {
 
 export {
   initSlider,
+  resetSlider,
 };

@@ -1275,6 +1275,7 @@ main {
   margin-bottom: 50px;
 
   font-size: 32px;
+  line-height: 1.2;
 }
 
 .success__title {
@@ -1282,6 +1283,7 @@ main {
   margin-bottom: 50px;
 
   font-size: 32px;
+  line-height: 1.2;
 }
 
 .error__title::before {
