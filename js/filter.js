@@ -3,6 +3,12 @@ import {makeRandomArr} from './utils.js';
 const DEBOUNCE_DELAY = 500;
 const MAX_RANDOM_PHOTOS = 10;
 
+const SortTypes = {
+  DEFAULT: 'filter-default',
+  RANDOM: 'filter-random',
+  DISCUSSED: 'filter-discussed',
+};
+
 const filter = document.querySelector('.img-filters');
 const filterBtns = filter.querySelectorAll('.img-filters__button');
 
@@ -31,13 +37,15 @@ const showFilter = (data, cb) => {
   });
 };
 
-const sortPhoto = (dataPhoto, typeSort) => {
-  if (typeSort === 'filter-default') {
-    return dataPhoto;
-  } else if (typeSort === 'filter-random') {
-    return makeRandomArr(dataPhoto).slice(0, MAX_RANDOM_PHOTOS);
-  } else if (typeSort === 'filter-discussed') {
-    return dataPhoto.slice().sort((a, b) => b.comments.length - a.comments.length);
+const sortPhoto = (dataPhoto, type) => {
+  switch (type) {
+    case SortTypes.RANDOM:
+      return makeRandomArr(dataPhoto).slice(0, MAX_RANDOM_PHOTOS);
+    case SortTypes.DISCUSSED:
+      return dataPhoto.slice().sort((a, b) => b.comments.length - a.comments.length);
+    case SortTypes.DEFAULT:
+    default:
+      return dataPhoto;
   }
 };
 
