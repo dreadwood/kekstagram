@@ -63,6 +63,21 @@ const isEscEvent = (evt) =>
   evt.key === 'Escape' || evt.key === 'Esc';
 
 
+/**
+  * @param {requestCallback} cb
+  * @param {number} timeout
+ */
+const debounce = (cb, timeout) => {
+  let lastTimeout;
+  return (() => {
+    if (lastTimeout) {
+      window.clearTimeout(lastTimeout);
+    }
+    lastTimeout = setTimeout(cb, timeout);
+  });
+};
+
+
 export {
   getRandomInteger,
   checkStrLength,
@@ -70,4 +85,5 @@ export {
   makeRandomArr,
   createArrSequenceNum,
   isEscEvent,
+  debounce,
 };
