@@ -16,7 +16,14 @@ const renderSmallPhoto = (imgData) => {
   return photoElement;
 };
 
+const clearFeed = () => {
+  const photos = photoContainer.querySelectorAll('.picture');
+  photos.forEach((photo) => photo.remove());
+};
+
 const renderPhotoFeed = (data) => {
+  clearFeed();
+
   const fragment = document.createDocumentFragment();
   data.forEach((imgData) => {
     const photoElement = renderSmallPhoto(imgData);
