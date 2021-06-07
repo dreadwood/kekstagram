@@ -1,4 +1,5 @@
 import {showBigPhoto} from './big-photo.js';
+import {filteringPhoto} from './filter.js';
 
 const photoContainer = document.querySelector('.pictures');
 const smallPhotoTemplate = document.querySelector('#picture')
@@ -23,9 +24,10 @@ const clearFeed = () => {
 
 const renderPhotoFeed = (data) => {
   clearFeed();
+  const filteredPhotos = filteringPhoto(data);
 
   const fragment = document.createDocumentFragment();
-  data.forEach((imgData) => {
+  filteredPhotos.forEach((imgData) => {
     const photoElement = renderSmallPhoto(imgData);
     photoElement.addEventListener('click', (evt) => {
       evt.preventDefault();
