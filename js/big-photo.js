@@ -14,6 +14,8 @@ const btnLoader  = bigPhoto.querySelector('.comments-loader');
 const commentTemplate = document.querySelector('#comment')
   .content.querySelector('.social__comment');
 
+let comments;
+
 const renderComment = (commentData) => {
   const commentElement = commentTemplate.cloneNode(true);
   const avatar = commentElement.querySelector('.social__picture');
@@ -25,7 +27,7 @@ const renderComment = (commentData) => {
   return commentElement;
 };
 
-const addComments = (comments, start, end) => {
+const addComments = (start, end) => {
   const fragment = document.createDocumentFragment();
   comments.slice(start, end).forEach((comment) => {
     const commentElement = renderComment(comment);
@@ -34,31 +36,28 @@ const addComments = (comments, start, end) => {
   commentsList.appendChild(fragment);
 };
 
-const renderCommentList = (comments) => {
-  let сurrentAmount = 0;
-  let totalAmount = сurrentAmount + NUMBER_COMMENTS_TO_SHOW;
+const btnLoaderClickHandler = () => {
+  let сurrentAmount = +numberCommentsShow.textContent;
+  const totalAmount = сurrentAmount + NUMBER_COMMENTS_TO_SHOW;
 
-  numberCommentsShow.textContent = totalAmount;
+  if (totalAmount >= comments.length) {
+    btnLoader.classList.add('hidden');
+    numberCommentsShow.textContent = comments.length;
+    btnLoader.removeEventListener('click', btnLoaderClickHandler);
+  } else {
+    numberCommentsShow.textContent = totalAmount;
+  }
+
+  addComments(сurrentAmount, totalAmount);
+};
+
+const renderCommentList = () => {
+  numberCommentsShow.textContent = NUMBER_COMMENTS_TO_SHOW;
   commentsCount.textContent = comments.length;
   commentsList.textContent = '';
   btnLoader.classList.remove('hidden');
 
-  const btnLoaderClickHandler = () => {
-    сurrentAmount = totalAmount;
-    totalAmount = сurrentAmount + NUMBER_COMMENTS_TO_SHOW;
-
-    if (totalAmount >= comments.length) {
-      btnLoader.classList.add('hidden');
-      numberCommentsShow.textContent = comments.length;
-      btnLoader.removeEventListener('click', btnLoaderClickHandler);
-    } else {
-      numberCommentsShow.textContent = totalAmount;
-    }
-
-    addComments(comments, сurrentAmount, totalAmount);
-  };
-
-  addComments(comments, сurrentAmount, totalAmount);
+  addComments(0, NUMBER_COMMENTS_TO_SHOW);
 
   btnLoader.addEventListener('click', btnLoaderClickHandler);
 };
@@ -78,7 +77,9 @@ const showBigPhoto = (imgData) => {
   description.textContent = imgData.description;
   likes.textContent = imgData.likes;
 
-  renderCommentList(imgData.comments);
+  comments = imgData.comments;
+
+  renderCommentList();
 
   document.addEventListener('keydown', escKeydownHandler);
 
@@ -87,6 +88,7 @@ const showBigPhoto = (imgData) => {
 };
 
 const hiddenBigPhoto = () => {
+  btnLoader.removeEventListener('click', btnLoaderClickHandler);
   bigPhoto.classList.add('hidden');
   document.body.classList.remove('modal-open');
 };
