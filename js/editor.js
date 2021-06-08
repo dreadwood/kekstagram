@@ -1,11 +1,11 @@
 import {sendData} from './api.js';
 import {initScale} from './editor-scale.js';
 import {initSlider, resetSlider} from './editor-slider.js';
+import {initFileUpload} from './editor-upload.js';
 import {tagsFieldInputHandler} from './editor-validation.js';
 import {showSuccess, showError} from './messages.js';
 import {isEscEvent} from './utils.js';
 
-const FILE_TYPES = ['image/jpeg', 'image/png', 'image/webp', 'image/gif'];
 const LEFT_MOUSE_CODE = 0;
 
 const uploadElement = document.querySelector('.img-upload');
@@ -50,21 +50,6 @@ btnClose.addEventListener('click', () => {
   hideEditor();
 });
 
-inputUpload.addEventListener('change', (evt) => {
-  const file = evt.target.files[0];
-  const matches = FILE_TYPES.some((it) => file.type === it);
-
-  if (matches) {
-    const reader = new FileReader();
-    reader.addEventListener('load', () => {
-      photo.src = reader.result;
-      showEditor();
-    });
-
-    reader.readAsDataURL(file);
-  }
-});
-
 form.addEventListener('submit', (evt) => {
   evt.preventDefault();
 
@@ -78,6 +63,7 @@ editor.addEventListener('mousedown', (evt) => {
   }
 });
 
+initFileUpload(inputUpload, photo, showEditor);
 initScale(uploadElement, photo);
 initSlider(uploadElement, photo);
 
