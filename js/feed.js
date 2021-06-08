@@ -1,4 +1,4 @@
-import {showBigPhoto} from './big-photo.js';
+import {showPost} from './post.js';
 import {filteringPhoto} from './filter.js';
 
 const photoContainer = document.querySelector('.pictures');
@@ -31,7 +31,7 @@ const renderPhotoFeed = (data) => {
     const photoElement = renderSmallPhoto(imgData);
     photoElement.addEventListener('click', (evt) => {
       evt.preventDefault();
-      showBigPhoto(imgData);
+      showPost(imgData);
     });
     fragment.appendChild(photoElement);
   });

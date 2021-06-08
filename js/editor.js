@@ -1,6 +1,7 @@
 import {sendData} from './api.js';
 import {initScale} from './editor-scale.js';
 import {initSlider, resetSlider} from './editor-slider.js';
+import {initFileUpload} from './editor-upload.js';
 import {tagsFieldInputHandler} from './editor-validation.js';
 import {showSuccess, showError} from './messages.js';
 import {isEscEvent} from './utils.js';
@@ -49,16 +50,6 @@ btnClose.addEventListener('click', () => {
   hideEditor();
 });
 
-inputUpload.addEventListener('change', () => {
-  showEditor();
-});
-
-// временно, пока не загружается нужное изображение
-// inputUpload.addEventListener('click', (evt) => {
-//   evt.preventDefault();
-//   showEditor();
-// });
-
 form.addEventListener('submit', (evt) => {
   evt.preventDefault();
 
@@ -72,6 +63,7 @@ editor.addEventListener('mousedown', (evt) => {
   }
 });
 
+initFileUpload(inputUpload, photo, showEditor);
 initScale(uploadElement, photo);
 initSlider(uploadElement, photo);
 
