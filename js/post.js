@@ -2,15 +2,15 @@ import {isEscEvent} from './utils.js';
 
 const NUMBER_COMMENTS_TO_SHOW = 5;
 
-const bigPhoto  = document.querySelector('.big-picture');
-const btnClose  = bigPhoto.querySelector('.big-picture__cancel');
-const img  = bigPhoto.querySelector('.big-picture__img img');
-const description  = bigPhoto.querySelector('.social__caption');
-const likes  = bigPhoto.querySelector('.likes-count');
-const commentsCount  = bigPhoto.querySelector('.comments-count');
-const numberCommentsShow  = bigPhoto.querySelector('.number-comments-show');
-const commentsList  = bigPhoto.querySelector('.social__comments');
-const btnLoader  = bigPhoto.querySelector('.comments-loader');
+const post  = document.querySelector('.big-picture');
+const btnClose  = post.querySelector('.big-picture__cancel');
+const img  = post.querySelector('.big-picture__img img');
+const description  = post.querySelector('.social__caption');
+const likes  = post.querySelector('.likes-count');
+const commentsCount  = post.querySelector('.comments-count');
+const numberCommentsShow  = post.querySelector('.number-comments-show');
+const commentsList  = post.querySelector('.social__comments');
+const btnLoader  = post.querySelector('.comments-loader');
 const commentTemplate = document.querySelector('#comment')
   .content.querySelector('.social__comment');
 
@@ -72,7 +72,7 @@ const renderCommentList = () => {
   addComments();
 };
 
-const showBigPhoto = (imgData) => {
+const showPost = (imgData) => {
   img.src = imgData.url;
   description.textContent = imgData.description;
   likes.textContent = imgData.likes;
@@ -83,33 +83,33 @@ const showBigPhoto = (imgData) => {
   document.addEventListener('keydown', escKeydownHandler);
 
   document.body.classList.add('modal-open');
-  bigPhoto.classList.remove('hidden');
+  post.classList.remove('hidden');
 };
 
-const hiddenBigPhoto = () => {
+const hiddenPost = () => {
   btnLoader.removeEventListener('click', btnLoaderClickHandler);
-  bigPhoto.classList.add('hidden');
+  post.classList.add('hidden');
   document.body.classList.remove('modal-open');
 };
 
 const escKeydownHandler = (evt) => {
   if (isEscEvent(evt)) {
     evt.preventDefault();
-    hiddenBigPhoto();
+    hiddenPost();
     document.removeEventListener('keydown', escKeydownHandler);
   }
 };
 
 btnClose.addEventListener('click', () => {
-  hiddenBigPhoto();
+  hiddenPost();
 });
 
-bigPhoto.addEventListener('click', (evt) => {
+post.addEventListener('click', (evt) => {
   if (evt.target.classList.contains('overlay')) {
-    hiddenBigPhoto();
+    hiddenPost();
   }
 });
 
 export {
-  showBigPhoto,
+  showPost,
 };
