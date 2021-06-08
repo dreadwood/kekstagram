@@ -1,5 +1,3 @@
-import '../nouislider/nouislider.js';
-
 const FilterOptions = {
   Chrome: {
     MIN: 0,
