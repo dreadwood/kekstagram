@@ -5,9 +5,6 @@ import {showAppError} from './messages.js';
 import './editor.js';
 import {debounce} from './utils.js';
 
-// TO-DO
-// убрать лишние функции из utils.js
-
 const DEBOUNCE_INTERVAL = 500;
 
 getData(
