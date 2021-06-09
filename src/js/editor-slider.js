@@ -1,4 +1,5 @@
-import '../nouislider/nouislider.js';
+import noUiSlider from 'nouislider';
+import 'nouislider/dist/nouislider.css';
 
 const FilterOptions = {
   Chrome: {
