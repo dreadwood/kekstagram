@@ -1,15 +1,22 @@
 const path = require('path');
 
 module.exports = {
-  mode: 'development',
   entry: './src/js/main.js',
   output: {
-    path: path.resolve(__dirname, 'dist/js'),
-    filename: 'main.bundle.js',
+    filename: 'js/main.bundle.js',
+    path: path.resolve(__dirname, 'public'),
   },
   devtool: 'source-map',
   devServer: {
-    contentBase: path.join(__dirname, 'dist'),
+    contentBase: path.join(__dirname, 'public'),
     watchContentBase: true,
+  },
+  module: {
+    rules: [
+      {
+        test: /\.css$/,
+        use: ['style-loader', 'css-loader'],
+      }
+    ],
   },
 };
