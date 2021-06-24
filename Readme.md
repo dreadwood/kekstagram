@@ -1,8 +1,5 @@
 # Личный проект «Кекстаграм»
 
-* Студент: [srg](https://up.htmlacademy.ru/javascript/22/user/1028327).
-* Наставник: [He Who Must Not Be Named](https://www.youtube.com/watch?v=dQw4w9WgXcQ).
-
 **Опубликованная версия доступна [тут](https://dreadwood.github.io/kekstagram/)**
 
 ---
